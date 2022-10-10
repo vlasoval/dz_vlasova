@@ -6,25 +6,31 @@ class Book(models.Model):
         max_length=40,
         verbose_name='Название книги'
     )
-    type_cover=models.ForeignKey(
-        'book_cover.BookCover',
-        verbose_name='Тип обложки',
-        on_delete=models.PROTECT,
-    )
-    book_genre=models.ForeignKey(
-        'book_genre.BookGenre',
+    # type_cover=models.ForeignKey(
+    #     'book_cover.BookCover',
+    #     verbose_name='Тип обложки',
+    #     on_delete=models.PROTECT,
+    # )
+    book_genre=models.ManyToManyField(
+        'book_reference.BookGenre',
         verbose_name='Жанр',
-        on_delete=models.PROTECT,
     )
     book_publisher=models.ForeignKey(
-        'book_publisher.BookPublisher',
+        'book_reference.BookPublisher',
         verbose_name='Издательство',
         on_delete=models.PROTECT,
     )
-    book_year=models.ForeignKey(
-        'book_year.BookYear',
-        verbose_name='Год',
+    book_series=models.ForeignKey(
+        'book_reference.BookSeries',
+        verbose_name='Серия',
         on_delete=models.PROTECT,
+        blank=True,
+        null=True,
     )    
     def __str__(self):
         return self.book_title
+
+    book_author=models.ManyToManyField(
+        'book_reference.BookAuthor',
+        verbose_name='Автор',
+    )

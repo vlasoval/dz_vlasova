@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'book_genre',
     'book_publisher',
     'book_year',
+    'book_reference',    
     'book',
 ]
 
