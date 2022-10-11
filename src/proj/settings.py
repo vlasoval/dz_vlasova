@@ -37,10 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'book_cover',
-    'book_genre',
-    'book_publisher',
-    'book_year',
     'book_reference',    
     'book',
 ]
