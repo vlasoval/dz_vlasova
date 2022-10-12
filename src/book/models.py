@@ -6,11 +6,6 @@ class Book(models.Model):
         max_length=40,
         verbose_name='Название книги'
     )
-    # type_cover=models.ForeignKey(
-    #     'book_cover.BookCover',
-    #     verbose_name='Тип обложки',
-    #     on_delete=models.PROTECT,
-    # )
     book_genre=models.ManyToManyField(
         'book_reference.BookGenre',
         verbose_name='Жанр',

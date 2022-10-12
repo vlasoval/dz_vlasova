@@ -35,6 +35,6 @@ class BookAuthor(models.Model):
         verbose_name='Автор'
         )
     def __str__(self):
-        return self.book_series
+        return self.book_author
 
 
