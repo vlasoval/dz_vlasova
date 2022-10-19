@@ -24,4 +24,9 @@ urlpatterns = [
     path('genre_delete/<int:pk>/', br_views.DeleteGenre.as_view()),
     path('genre_show/<int:pk>/', br_views.ShowGenre.as_view()),
     path('genres_show/', br_views.ShowGenres.as_view()),
+    path('author_create/', br_views.CreateAuthor.as_view()),
+    path('author_update/<int:pk>/', br_views.UpdateAuthor.as_view()),
+    path('author_delete/<int:pk>/', br_views.DeleteAuthor.as_view()),
+    path('author_show/<int:pk>/', br_views.ShowAuthor.as_view()),
+    path('authors_show/', br_views.ShowAuthors.as_view()),
 ]

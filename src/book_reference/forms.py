@@ -11,3 +11,10 @@ class GenreForm(ModelForm):
             'book_genre',
             'description'
             ] 
+
+class AuthorForm(ModelForm):
+    class Meta:
+        model = models.BookAuthor
+        fields = [
+            'book_author',
+            ]             

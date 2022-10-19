@@ -39,5 +39,7 @@ class BookAuthor(models.Model):
         )
     def __str__(self):
         return self.book_author
+    def get_absolute_url(self):
+        return f'/author_show/{self.pk}'
 
 

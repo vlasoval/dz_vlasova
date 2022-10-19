@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список жанров</title>
+    <title>Список авторов</title>
 </head>
 <body>
-    <h1>Список жанров</h1>
+    <h1>Список авторов</h1>
     <table border="1">
         {% for obj in object_list %}
         <tr>
-            <td><a href="/gernre-update/{{obj.pk}}/">{{obj.pk}}</a></td>
-            <td>{{obj.book_genre}}</td>
-            <td><a href="/gernre-delete/{{obj.pk}}/">DELETE</a></td>
+            <td><a href="/author_update/{{obj.pk}}/">{{obj.pk}}</a></td>
+            <td>{{obj.book_author}}</td>
+            <td><a href="/author_delete/{{obj.pk}}/">DELETE</a></td>
         </tr>
         {% endfor %}  
     </table>
