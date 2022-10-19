@@ -25,3 +25,10 @@ class PublisherForm(ModelForm):
         fields = [
             'book_publisher',
             ]   
+
+class SeriesForm(ModelForm):
+    class Meta:
+        model = models.BookSeries
+        fields = [
+            'book_series',
+            ]              

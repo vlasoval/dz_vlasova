@@ -76,4 +76,27 @@ class DeletePublisher(generic.DeleteView):
     model = models.BookPublisher
     template_name = 'book_reference/delete_publisher.html'
     success_url="/publishers_show"
-  
+
+
+class CreateSeries(generic.CreateView):
+    model = models.BookSeries
+    form_class = forms.SeriesForm
+    template_name = 'book_reference/create_series.html'
+
+class UpdateSeries(generic.UpdateView):
+    model = models.BookSeries
+    form_class = forms.SeriesForm
+    template_name = 'book_reference/update_series.html'
+
+class ShowSeries(generic.DetailView):
+    model = models.BookSeries
+    template_name = 'book_reference/detail_series.html'
+
+class ShowSeriesAll(generic.ListView):
+    model = models.BookSeries
+    template_name = 'book_reference/list_series_all.html'
+
+class DeleteSeries(generic.DeleteView):
+    model = models.BookSeries
+    template_name = 'book_reference/delete_series.html'
+    success_url="/series_all_show"  
