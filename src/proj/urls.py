@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from book_reference import views as br_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('genre_create/', br_views.CreateGenre.as_view()),
+    path('genre_update/<int:pk>/', br_views.UpdateGenre.as_view()),
+    path('genre_delete/<int:pk>/', br_views.DeleteGenre.as_view()),
+    path('genre_show/<int:pk>/', br_views.ShowGenre.as_view()),
+    path('genres_show/', br_views.ShowGenres.as_view()),
 ]

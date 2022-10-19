@@ -12,6 +12,9 @@ class BookGenre(models.Model):
     def __str__(self):
         return self.book_genre
 
+    def get_absolute_url(self):
+        return f'/genre_show/{self.pk}'
+
 
 class BookPublisher(models.Model):
     book_publisher= models.CharField(
