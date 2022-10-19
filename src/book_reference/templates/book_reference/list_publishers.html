@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список издательств</title>
+</head>
+<body>
+    <h1>Список издательств</h1>
+    <table border="1">
+        {% for obj in object_list %}
+        <tr>
+            <td><a href="/publisher_update/{{obj.pk}}/">{{obj.pk}}</a></td>
+            <td>{{obj.book_publisher}}</td>
+            <td><a href="/publisher_delete/{{obj.pk}}/">DELETE</a></td>
+        </tr>
+        {% endfor %}  
+    </table>
+</body>
+</html>

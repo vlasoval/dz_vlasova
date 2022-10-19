@@ -23,6 +23,8 @@ class BookPublisher(models.Model):
         )
     def __str__(self):
         return self.book_publisher
+    def get_absolute_url(self):
+        return f'/publisher_show/{self.pk}'
 
 class BookSeries(models.Model):
     book_series= models.CharField(

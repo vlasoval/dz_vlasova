@@ -18,3 +18,10 @@ class AuthorForm(ModelForm):
         fields = [
             'book_author',
             ]             
+
+class PublisherForm(ModelForm):
+    class Meta:
+        model = models.BookPublisher
+        fields = [
+            'book_publisher',
+            ]   
