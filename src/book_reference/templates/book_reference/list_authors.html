@@ -11,9 +11,9 @@
     <table border="1">
         {% for obj in object_list %}
         <tr>
-            <td><a href="/author_update/{{obj.pk}}/">{{obj.pk}}</a></td>
+            <td><a href="{% url 'book_reference:author-update' pk=obj.pk %}">{{obj.pk}}</a></td>
             <td>{{obj.book_author}}</td>
-            <td><a href="/author_delete/{{obj.pk}}/">DELETE</a></td>
+            <td><a href="{% url 'book_reference:author-delete' pk=obj.pk %}">DELETE</a></td>
         </tr>
         {% endfor %}  
     </table>

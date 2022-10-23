@@ -54,14 +54,14 @@ class Book(models.Model):
         max_length=30,
         verbose_name='ISBN'
     )
-    book_weight=models.IntegerField(
+    book_weight=models.PositiveIntegerField(
         verbose_name='Вес (гр)'
     )
     book_age=models.CharField(
         max_length=5,
         verbose_name='Возрастные ограничения'
     )
-    book_count=models.IntegerField(
+    book_count=models.PositiveIntegerField(
         verbose_name='Количество книг в наличии'
     )
     MY_CHOICES=[
