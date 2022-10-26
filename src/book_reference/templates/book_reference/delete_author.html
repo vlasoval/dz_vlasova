@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Удаление авторв</title>
-</head>
-<body>
-    <h1>Удаление авторв</h1>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Удаление автора
+{% endblock title %}
+{% block body %}
+    <h1>Удаление автора</h1>
     {{object.book_author}}
     <form action="" method="post">
         {% csrf_token %}
-        <input type="submit" value="Submit">
+        <input type="submit" class="btn btn-danger" value="Submit">
     </form>
-    </body>
-</html>
+{% endblock body %}

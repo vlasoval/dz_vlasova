@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Просмотр издательства</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Просмотр издательства
+{% endblock title %}
+{% block body %}
     <h1>Просмотр издательства</h1>
     {{object.book_publisher}}
     <form action="" method="post">
         {% csrf_token %}
     </form>
-    </body>
-</html>
+{% endblock body %}

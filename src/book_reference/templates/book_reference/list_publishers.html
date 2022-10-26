@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список издательств</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Список издательств
+{% endblock title %}
+{% block body %}
     <h1>Список издательств</h1>
-    <table border="1">
+    <table class="table table-bordered">
         {% for obj in object_list %}
         <tr>
             <td><a href="{% url 'book_reference:publisher-update' pk=obj.pk %}">{{obj.pk}}</a></td>
             <td>{{obj.book_publisher}}</td>
-            <td><a href="{% url 'book_reference:publisher-delete' pk=obj.pk %}">DELETE</a></td>
+            <td><a href="{% url 'book_reference:publisher-delete' pk=obj.pk %}" class="btn btn-danger"><i class="bi bi-x-lg"></i></a></td>
         </tr>
         {% endfor %}  
     </table>
-</body>
-</html>
+{% endblock body %}

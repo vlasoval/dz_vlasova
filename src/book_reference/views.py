@@ -27,7 +27,7 @@ class ShowGenres(generic.ListView):
 class DeleteGenre(generic.DeleteView):
     model = models.BookGenre
     template_name = 'book_reference/delete_genre.html'
-    success_url="/genres-show"
+    success_url="/refs/genres-show"
 
 
 class CreateAuthor(generic.CreateView):
@@ -51,7 +51,7 @@ class ShowAuthors(generic.ListView):
 class DeleteAuthor(generic.DeleteView):
     model = models.BookAuthor
     template_name = 'book_reference/delete_author.html'
-    success_url="/authors-show"
+    success_url="/refs/authors-show"
 
 
 class CreatePublisher(generic.CreateView):
@@ -75,7 +75,7 @@ class ShowPublishers(generic.ListView):
 class DeletePublisher(generic.DeleteView):
     model = models.BookPublisher
     template_name = 'book_reference/delete_publisher.html'
-    success_url="/publishers-show"
+    success_url="/refs/publishers-show"
 
 
 class CreateSeries(generic.CreateView):
@@ -99,4 +99,4 @@ class ShowSeriesAll(generic.ListView):
 class DeleteSeries(generic.DeleteView):
     model = models.BookSeries
     template_name = 'book_reference/delete_series.html'
-    success_url="/series-all-show"  
+    success_url="/refs/series-all-show"  

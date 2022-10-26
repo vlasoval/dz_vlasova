@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Просмотр жанра</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Просмотр жанра
+{% endblock title %}
+{% block body %}
     <h1>Просмотр жанра</h1>
     {{object.book_genre}}<br>
     {{object.description}}
     <form action="" method="post">
         {% csrf_token %}
     </form>
-    </body>
-</html>
+{% endblock body %}
