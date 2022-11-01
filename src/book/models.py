@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from pyexpat import model
 from random import choices
 from re import T
@@ -10,6 +11,10 @@ class Book(models.Model):
     book_title=models.CharField(
         max_length=40,
         verbose_name='Название книги'
+    )
+    book_cover_photo=models.ImageField(
+        verbose_name='Фото обложки',
+        upload_to='upload'
     )
     book_genre=models.ManyToManyField(
         'book_reference.BookGenre',

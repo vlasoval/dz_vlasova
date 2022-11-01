@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'book_reference',    
     'book',
+    'home_page',
 ]
 
 MIDDLEWARE = [
@@ -123,7 +124,12 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = 'static/'
-STATIC_ROOT='/home/vlasoval/static'
+STATIC_ROOT='/home/vlasoval/dz_vlasova/src/static'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT=BASE_DIR/'media'
+#MEDIA_ROOT='/home/vlasoval/dz_vlasova/src/media'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

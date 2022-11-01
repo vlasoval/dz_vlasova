@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Home page
+{% endblock title %}
+{% block body %}
+<h1>Home page</h1>
+    <table class="table table-bordered">
+        My home page
+        <div class="card" style="width: 18rem;">
+            <img src="https://miro.medium.com/max/1400/1*X-K_Y_gyRLAFr7t-uMjx9w.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{a_book.book_title}}</h5>
+              <p class="card-text">{{a_book.book_publisher}}</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+    </table>
+{% endblock body %}
