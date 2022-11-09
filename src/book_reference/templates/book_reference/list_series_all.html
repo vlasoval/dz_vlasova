@@ -9,7 +9,7 @@
         {% for obj in object_list %}
         <tr>
             <td><a href="{% url 'book_reference:series-update' pk=obj.pk %}">{{obj.pk}}</a></td>
-            <td>{{obj.book_series}}</td>
+            <td>{{obj.name}}</td>
             <td><a href="{% url 'book_reference:series-delete' pk=obj.pk %}" class="btn btn-danger"><i class="bi bi-x-lg"></i></a></td>
         </tr>
         {% endfor %}  

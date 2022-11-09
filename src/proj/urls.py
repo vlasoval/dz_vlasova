@@ -17,13 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from home_page.views import HomePage
-
+from home_page import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('refs/', include('book_reference.urls', namespace='book_reference')),
-    path('',HomePage.as_view(), name='home-page')
+    path('',views.HomePage.as_view(), name='home-page'),
+    path('catalog/',include('catalog.urls', namespace='catalog')),
+    path('delivery/',views.Delivery.as_view(), name='delivery'),
+    path('payment/',views.Payment.as_view(), name='payment'),
+    path('contacts/',views.Contacts.as_view(), name='contacts'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

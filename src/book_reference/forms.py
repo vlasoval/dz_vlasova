@@ -8,7 +8,7 @@ class GenreForm(ModelForm):
     class Meta:
         model = models.BookGenre
         fields = [
-            'book_genre',
+            'name',
             'description'
             ] 
 
@@ -16,19 +16,19 @@ class AuthorForm(ModelForm):
     class Meta:
         model = models.BookAuthor
         fields = [
-            'book_author',
+            'name',
             ]             
 
 class PublisherForm(ModelForm):
     class Meta:
         model = models.BookPublisher
         fields = [
-            'book_publisher',
+            'name',
             ]   
 
 class SeriesForm(ModelForm):
     class Meta:
         model = models.BookSeries
         fields = [
-            'book_series',
+            'name',
             ]              

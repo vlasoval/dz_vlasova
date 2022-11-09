@@ -4,16 +4,107 @@
 Home page
 {% endblock title %}
 {% block body %}
-<h1>Home page</h1>
-    <table class="table table-bordered">
-        My home page
-        <div class="card" style="width: 18rem;">
-            <img src="https://miro.medium.com/max/1400/1*X-K_Y_gyRLAFr7t-uMjx9w.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{a_book.book_title}}</h5>
-              <p class="card-text">{{a_book.book_publisher}}</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+<!-- <h1 align="center">Home page</h1> -->
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-4">
+        <div class="list-group list-group-flush">
+          <a href="/catalog" class="list-group-item list-group-item-danger" ><h5><i class="bi bi-caret-down"></i> Каталог</h5></a>
+          {% for obj in current_genre_all %}
+          <a href="{% url 'catalog:catalogs' pk=obj.pk %}" class="list-group-item list-group-item-action">{{obj.name}}</a>
+          {% endfor %} 
+        </div>
+      </div>
+      <div class="col-8">
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleDark"  data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+              <img src="..\..\media\upload\ПОДАРОК.jpg" class="rounded mx-auto d-block w-100"  alt="..."  >
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Книга в подарок</h5>
+                <p>за первый товар с регистрацией!</p>
+              </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+              <img src="..\..\media\upload\СЕРТИФИКАТ.png" class="rounded mx-auto d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h7>Приобрести подарочнный сертификат</h7>
+                <!-- <p>Подарок, с которым всегда угадаешь!</p> -->
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="..\..\media\upload\ДОСТАВКА.png" class="rounded mx-auto d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Бесплатная доставка товаров</h5>
+                <p>для заказов стоимостью свыше 25 рублей</p>
+              </div>
             </div>
           </div>
-    </table>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <br>
+      </div> 
+      <br>
+      <h5 align="center">Новинки</h5>   
+      <div class="row row-cols-1 row-cols-md-5 g-2">
+        {% for obj in new_book %}
+        <div class="col">
+          <div class="card h-100" style="width: 15rem;">
+              <img src="{{ obj.book_cover_photo.url }}" class="card-img-top h-100" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{obj.book_title}}</h5>
+                <p class="card-text">{{obj.book_author.values_list}}</p>
+                <p class="card-text">{{obj.book_price}} руб.</p>
+                <a href="#" class="btn btn-primary">В корзину</a>
+              </div>
+            </div>
+          </div>         
+          {% endfor %}  
+        </div>
+        <br>
+        <h5 align="center">Наиболее популярные</h5>
+        <div class="row row-cols-1 row-cols-md-5 g-2">
+          {% for obj in best_book %}
+          <div class="col">
+            <div class="card h-100" style="width: 15rem;">
+                <img src="{{ obj.book_cover_photo.url }}" class="card-img-top h-100" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{obj.book_title}}</h5>
+                  <p class="card-text">{{obj.book_author.values_list}}</p>
+                  <p class="card-text">{{obj.book_price}} руб.</p>
+                  <a href="#" class="btn btn-primary">В корзину</a>
+                </div>
+              </div>
+            </div>         
+            {% endfor %}  
+          </div>  
+          <br>
+          <h5 align="center">Рекомендуем</h5>
+          <div class="row row-cols-1 row-cols-md-5 g-2">
+            {% for obj in ref_book %}
+            <div class="col">
+              <div class="card h-100" style="width: 15rem;">
+                  <img src="{{ obj.book_cover_photo.url }}" class="card-img-top h-100" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{obj.book_title}}</h5>
+                    <p class="card-text">{{obj.book_author.values_list.all}}</p>
+                    <p class="card-text">{{obj.book_price}} руб.</p>
+                    <a href="#" class="btn btn-primary">В корзину</a>
+                  </div>
+                </div>
+              </div>         
+              {% endfor %}  
+            </div>  
 {% endblock body %}

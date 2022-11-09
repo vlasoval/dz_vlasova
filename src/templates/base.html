@@ -8,33 +8,56 @@
     <link href="{% static 'bs/css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link href="{% static 'bs/css/custom.css' %}" rel="stylesheet">
     <link href="{% static 'icons/bootstrap-icons.css' %}" rel="stylesheet">
-    <script src="{% static 'bs/js/bootstrap.min.js' %}" ></script>
+    <script src="{% static 'bs/js/bootstrap.bundle.min.js' %}" ></script>
     <title>{% block title %}{% endblock title %}</title>
+    <style>
+      body{background-color: #FFF5EE;}
+      .carousel-inner{background-color: white;}
+      .card{margin-bottom:20px;}
+    </style>
 </head>
 <body class="d-flex flex-column h-100">
     <header>
         <!-- Fixed navbar -->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">Fixed navbar</a>
+            <a class="navbar-brand" href="/" style="font-family:Georgia, serif"><i class="bi bi-book"></i> Книжный магазин "Чтец"</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Каталог
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                    {% for obj in current_genre_all %}
+                    <li><a class="dropdown-item" href="{% url 'catalog:catalogs' pk=obj.pk %}">{{obj.name}}</a></li>
+                    {% endfor %}
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
             <div class="collapse navbar-collapse" id="navbarCollapse">
               <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  <a class="nav-link active" href="/delivery">Доставка</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
+                  <a class="nav-link active" href="/payment">Оплата</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link disabled">Disabled</a>
+                  <a class="nav-link active" href="/contacts">Контакты</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled"><i class="bi bi-telephone"></i></a>
                 </li>
               </ul>
               <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn btn-outline-light" type="submit">Search</button>
               </form>
             </div>
           </div>
@@ -48,7 +71,7 @@
   
   <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
-      <span class="text-muted">{% block footer %}© 2022{% endblock footer %}</span>
+      <span class="text-muted">{% block footer %}<a href="#" class="up-btn up-btn_visible" text-align='center' >Наверх</a>{% endblock footer %}</span>
     </div>
   </footer>
 </body>

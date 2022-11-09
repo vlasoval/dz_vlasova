@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Home page
+{% endblock title %}
+{% block body %}
+<h1 align="center">Каталог товаров</h1>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Главная</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Каталог</li>
+  </ol>
+</nav>
+<div class="row row-cols-3 row-cols-md-3 g-2">
+    {% for obj in object_list %}
+    <div class="col">
+        <div class="card h-100 border-secondary" style="width: 20rem;" >
+            <div class="card-body">
+              <h5 class="card-title" style="text-align:center"><i class="bi bi-journal-bookmark-fill"></i></h5>
+              <h5 class="card-title" style="text-align:center">{{obj.name}}</h5>
+              <p class="card-text" style="text-align:center">{{obj.description}}</p>
+              <a href="{% url 'catalog:catalogs' pk=obj.pk %}" class="btn btn-primary" style="display: block; margin: 0 auto;">Перейти в раздел</a>
+            </div>
+          </div>
+        </div>         
+        {% endfor %}  
+      </div>
+      <br>
+{% endblock body %}

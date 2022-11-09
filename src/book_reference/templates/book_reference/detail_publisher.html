@@ -5,7 +5,7 @@
 {% endblock title %}
 {% block body %}
     <h1>Просмотр издательства</h1>
-    {{object.book_publisher}}
+    {{object.name}}
     <form action="" method="post">
         {% csrf_token %}
     </form>

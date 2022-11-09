@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Home page
+{% endblock title %}
+{% block body %}
+        <h5 align="center">Каталог товаров</h5>   
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Главная</a></li>
+            <li class="breadcrumb-item"><a href="/catalog">Каталог</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{current_genre.name}}</li>
+          </ol>
+        </nav>
+
+        <div class="row row-cols-1 row-cols-md-5 g-2">
+          {% for obj in book_filter %}
+          <div class="col">
+            <div class="card h-100" style="width: 15rem;">
+                <img src="{{ obj.book_cover_photo.url }}" class="card-img-top h-100" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{obj.book_title}}</h5>
+                  <p class="card-text">{{obj.book_author.values_list}}</p>
+                  <p class="card-text">{{obj.book_price}} руб.</p>
+                  <a href="#" class="btn btn-primary">В корзину</a>
+                </div>
+              </div>
+            </div>         
+            {% endfor %}  
+          </div>
+{% endblock body %}  

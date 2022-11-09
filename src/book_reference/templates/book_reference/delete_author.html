@@ -5,7 +5,7 @@
 {% endblock title %}
 {% block body %}
     <h1>Удаление автора</h1>
-    {{object.book_author}}
+    {{object.name}}
     <form action="" method="post">
         {% csrf_token %}
         <input type="submit" class="btn btn-danger" value="Submit">
