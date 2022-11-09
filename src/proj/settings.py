@@ -125,7 +125,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = 'static/'
-STATIC_ROOT='/home/vlasoval/dz_vlasova/src/static'
+# STATIC_ROOT='/home/vlasoval/dz_vlasova/src/static'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT=BASE_DIR/'media'
