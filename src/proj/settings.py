@@ -128,8 +128,8 @@ STATIC_URL = 'static/'
 # STATIC_ROOT='/home/vlasoval/dz_vlasova/src/static'
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT=BASE_DIR/'media'
-#MEDIA_ROOT='/home/vlasoval/dz_vlasova/src/media'
+# MEDIA_ROOT=BASE_DIR/'media'
+MEDIA_ROOT='/home/vlasoval/dz_vlasova/src/media'
 
 
 # Default primary key field type
