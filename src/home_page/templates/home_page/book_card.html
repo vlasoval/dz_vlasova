@@ -3,11 +3,11 @@
         <a href="{% url 'book:book-detail' pk=book.pk %}" class="h-50 w-50 mx-auto">
           <img src="{{ book.book_cover_photo.url }}" class="card-img-top">
         </a>
-        <div class="card-body">
+        <div class="card-body d-flex flex-column">
           <h5 class="card-title">{{book.book_title}}</h5>
           <p class="card-text">{% for author in book.book_author.values_list %} {{author.1}} {% endfor %}</p>
           <p class="card-text">{{book.book_price}} руб.</p>
-          <a href="{% url 'book:book-detail' pk=book.pk %}" class="btn btn-primary">Просмотреть</a>
+          <a href="{% url 'book:book-detail' pk=book.pk %}" class="btn btn-primary mt-auto">Просмотреть</a>
         </div>
     </div>
   </div> 
