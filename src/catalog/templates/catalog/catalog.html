@@ -13,19 +13,9 @@ Home page
           </ol>
         </nav>
 
-        <div class="row row-cols-1 row-cols-md-5 g-2">
+        <div class="row row-cols-1 row-cols-md-5 g-2 text-center">
           {% for obj in book_filter %}
-          <div class="col">
-            <div class="card h-100" style="width: 15rem;">
-                <img src="{{ obj.book_cover_photo.url }}" class="card-img-top h-100" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">{{obj.book_title}}</h5>
-                  <p class="card-text">{{obj.book_author.values_list}}</p>
-                  <p class="card-text">{{obj.book_price}} руб.</p>
-                  <a href="#" class="btn btn-primary">В корзину</a>
-                </div>
-              </div>
-            </div>         
-            {% endfor %}  
-          </div>
+          {% include "home_page/book_card.html" with book=obj %}             
+          {% endfor %}  
+        </div>
 {% endblock body %}  

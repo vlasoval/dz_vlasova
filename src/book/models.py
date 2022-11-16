@@ -6,11 +6,14 @@ from django import forms
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+
+
 # Create your models here.
 class Book(models.Model):
     book_title=models.CharField(
         max_length=40,
         verbose_name='Название книги'
+        
     )
     book_cover_photo=models.ImageField(
         verbose_name='Фото обложки',
@@ -90,6 +93,9 @@ class Book(models.Model):
     book_date_change=models.DateField(
         auto_now=True,
         verbose_name='Дата последнего изменения карточки'
-    )        
+    )
+    search_fields=['book_title', 'book_author']        
     def __str__(self):
         return self.book_title
+
+

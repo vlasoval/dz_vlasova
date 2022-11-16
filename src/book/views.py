@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.views import generic
+from . import models
 
-# Create your views here.
+from home_page.views import BaseTemplatePageMixin
+
+
+class ShowBook(BaseTemplatePageMixin, generic.DetailView):
+    model = models.Book
+    template_name = 'book/detail_book.html'

@@ -14,7 +14,7 @@ Home page
           <a href="{% url 'catalog:catalogs' pk=obj.pk %}" class="list-group-item list-group-item-action">{{obj.name}}</a>
           {% endfor %} 
         </div>
-      </div>
+      </div>  
       <div class="col-8">
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
@@ -60,51 +60,21 @@ Home page
       <h5 align="center">Новинки</h5>   
       <div class="row row-cols-1 row-cols-md-5 g-2">
         {% for obj in new_book %}
-        <div class="col">
-          <div class="card h-100" style="width: 15rem;">
-              <img src="{{ obj.book_cover_photo.url }}" class="card-img-top h-100" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{obj.book_title}}</h5>
-                <p class="card-text">{{obj.book_author.values_list}}</p>
-                <p class="card-text">{{obj.book_price}} руб.</p>
-                <a href="#" class="btn btn-primary">В корзину</a>
-              </div>
-            </div>
-          </div>         
-          {% endfor %}  
+        {% include "home_page/book_card.html" with book=obj %}        
+        {% endfor %}  
         </div>
         <br>
         <h5 align="center">Наиболее популярные</h5>
         <div class="row row-cols-1 row-cols-md-5 g-2">
           {% for obj in best_book %}
-          <div class="col">
-            <div class="card h-100" style="width: 15rem;">
-                <img src="{{ obj.book_cover_photo.url }}" class="card-img-top h-100" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">{{obj.book_title}}</h5>
-                  <p class="card-text">{{obj.book_author.values_list}}</p>
-                  <p class="card-text">{{obj.book_price}} руб.</p>
-                  <a href="#" class="btn btn-primary">В корзину</a>
-                </div>
-              </div>
-            </div>         
-            {% endfor %}  
-          </div>  
-          <br>
-          <h5 align="center">Рекомендуем</h5>
-          <div class="row row-cols-1 row-cols-md-5 g-2">
-            {% for obj in ref_book %}
-            <div class="col">
-              <div class="card h-100" style="width: 15rem;">
-                  <img src="{{ obj.book_cover_photo.url }}" class="card-img-top h-100" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">{{obj.book_title}}</h5>
-                    <p class="card-text">{{obj.book_author.values_list.all}}</p>
-                    <p class="card-text">{{obj.book_price}} руб.</p>
-                    <a href="#" class="btn btn-primary">В корзину</a>
-                  </div>
-                </div>
-              </div>         
-              {% endfor %}  
-            </div>  
+          {% include "home_page/book_card.html" with book=obj %}        
+          {% endfor %}  
+        </div>  
+        <br>
+        <h5 align="center">Рекомендуем</h5>
+        <div class="row row-cols-1 row-cols-md-5 g-2">
+          {% for obj in ref_book %}
+          {% include "home_page/book_card.html" with book=obj %} 
+          {% endfor %}  
+        </div>  
 {% endblock body %}

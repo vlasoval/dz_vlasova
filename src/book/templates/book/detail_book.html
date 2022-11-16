@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}
+Просмотр товара
+{% endblock title %}
+{% block body %}
+    <h1>Просмотр товара</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <img style="max-width: 100%;" src="{{ object.book_cover_photo.url }}" />
+            </div>
+            <div class="col-8">
+              <h2>{{ object.book_title }}</h2>  
+              <div>
+                Жанры : {% for genre in object.book_genre.all %} <a href="{% url 'catalog:catalogs' pk=genre.pk %}">{{ genre.name }}</a> {% endfor %}
+              </div>          
+              <div>
+                Авторы: {% for author in object.book_author.values_list %}{{author.1}}  {% endfor %}
+              </div>
+              <div>
+                Издательство: {{object.book_publisher}} 
+              </div>
+              <div>
+                Серия: {{object.book_series}} 
+              </div>
+              <div>
+                Цена: {{object.book_price}} руб. 
+              </div>
+              <div>
+                Год изднания: {{object.book_year}} 
+              </div>
+              <div>
+                Колличество страниц: {{object.book_page}} 
+              </div>
+              <div>
+                Переплет: {{object.book_cover}} 
+              </div>
+              <div>
+                Формат: {{object.book_format}} 
+              </div>
+              <div>
+                ISBN: {{object.book_isbn}} 
+              </div>
+              <div>
+                Вес: {{object.book_weight}} гр.
+              </div>
+              <div>
+                Возрастные ограничения: {{object.book_age}}
+              </div>
+              <div>
+                Рейтинг: {{object.book_rating}}
+              </div>
+            </div>
+          </div>
+    </div>
+{% endblock body %}

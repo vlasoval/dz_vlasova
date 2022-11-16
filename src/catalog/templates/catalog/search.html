@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Home page
+{% endblock title %}
+{% block body %}
+<h1 align="center">Поиск</h1>   
+  <div class="row row-cols-1 row-cols-md-5 g-2 text-center">
+    {% for obj in search_b %}
+    {% include "home_page/book_card.html" with book=obj %}       
+    {% endfor %}  
+  </div>
+  <br>      
+{% endblock body %}
