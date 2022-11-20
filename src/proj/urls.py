@@ -24,6 +24,7 @@ from catalog import views as c_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('refs/', include('book_reference.urls', namespace='book_reference')),
+    path('order/', include('orders.urls', namespace='orders')),
     path('',views.HomePage.as_view(), name='home-page'),
     path('catalog/',include('catalog.urls', namespace='catalog')),
     path('delivery/',views.Delivery.as_view(), name='delivery'),
