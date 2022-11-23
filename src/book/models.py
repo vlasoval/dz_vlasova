@@ -96,6 +96,6 @@ class Book(models.Model):
     )
     search_fields=['book_title', 'book_author']        
     def __str__(self):
-        return self.book_title
+        return f'{self.book_title} {self.book_price}'
 
 

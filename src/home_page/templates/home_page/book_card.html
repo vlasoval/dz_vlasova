@@ -9,7 +9,7 @@
           <p class="card-text">{{book.book_price}} руб.</p>
           <a href="{% url 'book:book-detail' pk=book.pk %}" class="btn mt-auto">Просмотреть товар</a>
           <!-- <a href="{% url 'book:book-detail' pk=book.pk %}" class="btn btn-primary mt-auto">Добавить в корзину</a> -->
-          <form action='' method="post">
+          <form action='{% url 'orders:show-cart' %}' method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-primary mt-auto">Добавить в корзину</button>
             <input type="number" name="quantity" id="" value="1" step="1" min="1" width="min">
