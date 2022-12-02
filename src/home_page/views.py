@@ -18,7 +18,6 @@ class HomePage(BaseTemplatePageMixin, generic.TemplateView):
         context['new_book'] = b_models.Book.objects.order_by('-book_date')
         context['best_book'] = b_models.Book.objects.order_by('book_rating')
         context['ref_book'] = b_models.Book.objects.order_by('book_count')
-        
         return context
 
 class Delivery(BaseTemplatePageMixin, generic.TemplateView):

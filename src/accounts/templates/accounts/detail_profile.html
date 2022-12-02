@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Просмотр жанра
+{% endblock title %}
+{% block body %}
+    <h1>Просмотр жанра</h1>
+    {{object.user.username}}<br>
+    {{object.username}}
+    <form action="" method="post">
+        {% csrf_token %}
+    </form>
+{% endblock body %}

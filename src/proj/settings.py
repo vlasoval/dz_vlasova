@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
     'crispy_forms',
+    'betterforms',
     'crispy_bootstrap5',
     'book_reference',    
     'book',
@@ -127,11 +128,9 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = 'static/'
-# STATIC_ROOT='/home/vlasoval/dz_vlasova/src/static'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT='media/'
-#MEDIA_ROOT='/home/vlasoval/dz_vlasova/src/media'
 
 
 # Default primary key field type

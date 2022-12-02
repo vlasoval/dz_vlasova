@@ -94,8 +94,7 @@ class Book(models.Model):
         auto_now=True,
         verbose_name='Дата последнего изменения карточки'
     )
-    search_fields=['book_title', 'book_author']        
+    # search_fields=['book_title', 'book_author']        
     def __str__(self):
-        return f'{self.book_title} {self.book_price}'
-
+        return self.book_title
 

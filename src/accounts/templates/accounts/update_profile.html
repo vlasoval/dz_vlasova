@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Редактировать профиль
+{% endblock title %}
+{% block body %}
+    <h1>Редактировать профиль</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" class="btn btn-info" value="Submit">
+    </form>
+{% endblock body %}
