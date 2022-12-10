@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Список заказов
+{% endblock title %}
+{% block body %}
+    <h1 style="text-align:center">Информация о заказе</h1>
+    <table class="table table-bordered">
+        <tr>
+            <td><strong>Номер заказа</strong></td>
+            <td><strong>Статус</strong></td>
+            <td><strong>Фамилия Имя</strong></td>
+            <td><strong>Пользователь</strong></td>
+            <td><strong>Телефонный номер</strong></td>
+            <td><strong>Email</strong></td>
+            <td><strong>Адрес доставки</strong></td>
+            <td><strong>Комментарий к заказу</strong></td>
+            <td><strong>Дата оформления заказа</strong></td>
+            <td><strong>Дата изменения заказа</strong></td>
+        </tr>
+        <tr>
+            <td>{{object.pk}}</td>
+            <td>{{object.status}}</td>            
+            <td>{{object.last_first_name}}</td>
+            <td>{{object.cart.user.username}}</td> 
+            <td>{{object.phone_number}}</td>
+            <td>{{object.email}}</td>
+            <td>{{object.adress}}</td>
+            <td>{{object.information}}</td>
+            <td>{{object.created_date}}</td>
+            <td>{{object.updated_date}}</td>
+        </tr>
+    </table>
+    <!-- <a href="{% url 'orders:order-update' pk=order.pk %}">Изменить заказ</a> -->
+{% endblock body %}

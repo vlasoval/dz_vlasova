@@ -1,5 +1,9 @@
 from django.views import generic
-from . import models
+from . import models,forms
+from book_reference import models as b_models
+from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 
 from home_page.views import BaseTemplatePageMixin
 
@@ -7,3 +11,101 @@ from home_page.views import BaseTemplatePageMixin
 class ShowBook(BaseTemplatePageMixin, generic.DetailView):
     model = models.Book
     template_name = 'book/detail_book.html'
+
+class CreateBookComments(generic.CreateView):
+    model = models.BookComments
+    form_class = forms.BookCommentsForm
+    template_name = 'book/create_book_comment.html'
+
+    def form_valid(self, form):
+        book_pk = self.kwargs.get('pk')
+        book = models.Book.objects.get(pk=book_pk)
+        form.instance.book = book
+        form.instance.customer = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('book:book-detail', kwargs={'pk': self.object.book.pk})
+
+
+class UpdateBookComments(generic.UpdateView):
+    model = models.BookComments
+    form_class = forms.BookCommentsForm
+    template_name = 'book/update_book_comment.html'
+
+    def get_success_url(self):
+        return reverse_lazy('book:book-detail', kwargs={'pk': self.object.book.pk})
+
+
+class DeleteBookComments(generic.DeleteView):
+    model = models.BookComments
+    template_name = 'book/delete_book_comment.html'
+
+    def get_success_url(self):
+        return reverse_lazy('book:book-detail', kwargs={'pk': self.object.book.pk})
+
+class ShowBooks(generic.ListView):
+    model = models.Book
+    template_name = 'book/book_list.html'
+
+class CreateBook(generic.CreateView):
+    model = models.Book
+    form_class = forms.BookForm
+    template_name = 'book/create_book.html'
+
+    def get_success_url(self):
+        return reverse_lazy('book:book-detail', kwargs={'pk': self.object.pk})
+
+
+class UpdateBook(generic.UpdateView):
+    model = models.Book
+    form_class = forms.BookForm
+    template_name = 'book/update_book.html'
+
+    def get_success_url(self):
+        return reverse_lazy('book:book-detail', kwargs={'pk': self.object.pk})
+
+
+def handle_uploaded_file(f):
+    file_content = f.read().decode("utf-8")
+    for line in file_content.split('\n'):
+        fields = line.split(',')
+
+        book = models.Book(
+            book_title=fields[0],
+            book_cover_photo=fields[1],
+
+            book_publisher=b_models.BookPublisher.objects.get(pk=int(fields[3])),
+            book_series=b_models.BookSeries.objects.get(pk=int(fields[4])),
+            
+            book_price=float(fields[6]),
+            book_year=int(fields[7]),
+            book_page=int(fields[8]),
+            book_cover=fields[9],
+            book_format=fields[10],
+            book_isbn=fields[11],
+            book_weight=int(fields[12]),
+            book_age=fields[13],
+            book_count=int(fields[14]),
+            book_active=fields[15],
+            book_rating=float(fields[16]),
+        )
+        book.save()
+        
+        book.book_genre.add(b_models.BookGenre.objects.get(pk=int(fields[2])))
+        book.book_author.add(b_models.BookAuthor.objects.get(pk=int(fields[5])))
+
+        
+
+def upload_file(request):
+    if request.method == 'POST':
+        print('hello2')
+        form = forms.UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            print('hello3')
+            handle_uploaded_file(request.FILES['file'])
+            return redirect('home-page')
+    else:
+        form = forms.UploadFileForm()
+        print('hello4')
+    return render(request, 'book/create_book_cvs.html', {'form': form})

@@ -23,7 +23,7 @@
             </td>
         </tr>
         {% for obj in object_list %}
-        <tr>
+        <tr>      
             <td><a href="{% url 'accounts:profile-update' pk=obj.user.pk %}">{{obj.user.username}}</a></td>
             <td>{{obj.user.email}}</td>
             <td>{{obj.phone_number}}</td>

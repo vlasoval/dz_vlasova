@@ -38,7 +38,16 @@
                   </ul>
                 </li>
               </ul>
-            </div>
+            </div>            
+            {% for group in request.user.groups.all %}
+              {% if group.name == 'Managers'%}
+                <ul class="navbar-nav me-auto mb-3 mb-md-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/admin-portal"><b>Административный портал</b></a>
+                  </li>
+                </ul>
+              {% endif %}
+            {% endfor %} 
           </div>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-3 mb-md-0">
@@ -66,6 +75,8 @@
                   Привет, {{ user.username }}!
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="{% url 'accounts:profile-detail' pk=user.profile.pk %}">Личные данные</a></li>
+                  <li><a class="dropdown-item" href="{% url 'orders:orders-user' %}">Мои заказы</a></li>
                   <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
                 </ul>
               </li>

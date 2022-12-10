@@ -3,6 +3,7 @@ from . import models, forms
 from book import models as book_models
 from django.views import generic
 from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model
 
 class DelPosition(generic.DeleteView):
     model = models.BookInCart
@@ -45,25 +46,72 @@ def show_cart(request):
         if cart_id:
             cart = models.Cart.objects.get(pk=cart_id)
             context['cart'] = cart
-    context['form'] = forms.OrderForm()
+    if request.user.is_authenticated:
+        context['form'] = forms.OrderForm(initial={'last_first_name' : request.user.last_name+' '+request.user.first_name,\
+            'email': request.user.email,\
+            'adress': request.user.profile.address1,\
+            'phone_number': request.user.profile.phone_number})       
+    else:
+        context['form'] = forms.OrderForm()
+
     return render(
         request=request, 
         template_name='orders/view_cart.html', 
         context=context)
 
 class Order(generic.CreateView):
-    template_name='orders/create_order.html'
     model=models.Order
     form_class=forms.OrderForm
-    success_url=reverse_lazy('orders:order-success')
     def form_valid(self, form):
         cart = models.Cart.objects.get(pk=self.request.session.get('cart_id'))
         form.instance.cart=cart
         return super().form_valid(form)
     def get_success_url(self):
-        print(self.request.session['cart_id'])
         del self.request.session['cart_id']
-        return super().get_success_url()
+        orderid=self.object.pk
+        return reverse_lazy('orders:order-success', kwargs={'pk': orderid})
 
-class OrderSuccess(generic.TemplateView):
+class OrderSuccess(generic.DetailView):
+    model = models.Order
     template_name='orders/success_order.html'
+
+class OrdersAll(generic.ListView):
+    model = models.Order
+    # permission_required = ("accounts.view_book_genre")
+    # login_url = reverse_lazy('login')
+    template_name = 'orders/list_orders.html'
+
+class OrdersUser(generic.ListView):
+    model = models.Order
+    # permission_required = ("accounts.view_book_genre")
+    # login_url = reverse_lazy('login')
+    template_name = 'orders/list_orders.html'    
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args,**kwargs)      
+        return queryset.filter(cart__user__pk=self.request.user.pk)
+class OrderDetail(generic.DetailView):
+    model = models.Order
+    template_name = 'orders/order_detail.html'
+
+class OrderUpdate(generic.UpdateView):
+    model = models.Order
+    form_class = forms.OrderUpdateForm
+    template_name = 'orders/update_orders.html'
+    def get_success_url(self):
+        return reverse_lazy('orders:order-detail', kwargs={'pk': self.object.pk})
+
+class OrderCommentUpdate(generic.UpdateView):
+    model = models.Order
+    form_class = forms.CommentUpdateForm
+    template_name = 'orders/update_orders.html'
+    def get_success_url(self):
+        return reverse_lazy('orders:order-detail', kwargs={'pk': self.object.pk})
+
+class OrderDelete(generic.DeleteView):
+    model = models.Order
+    template_name='orders/order_delete.html'
+    def get_success_url(self):
+        return reverse_lazy('orders:orders-user')
+
+
+

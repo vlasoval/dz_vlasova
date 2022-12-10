@@ -39,6 +39,11 @@ class ShowProfiles(generic.ListView):
     # permission_required = ("accounts.view_book_genre")
     # login_url = reverse_lazy('login')
     template_name = 'accounts/list_profiles.html'
+class ShowProfile(generic.DetailView):
+    model = models.User
+    # permission_required = ("accounts.view_book_genre")
+    # login_url = reverse_lazy('login')
+    template_name = 'accounts/detail_profile.html'    
 
 class ShowCustomers(generic.ListView):
     model = models.Profile
@@ -76,9 +81,10 @@ class UpdateProfiles(UpdateView):
     model = User
     form_class = UserEditMultiForm
     template_name = 'accounts/update_profile.html'
-    success_url = reverse_lazy('all-profiles')
     context_object_name='form_user'
-
+    def get_success_url(self):
+        cur_user=self.get_object().profile.pk
+        return reverse_lazy('accounts:profile-detail', kwargs={'pk': cur_user})
     def get_form_kwargs(self):
         kwargs = super(UpdateProfiles, self).get_form_kwargs()
         kwargs.update(instance={

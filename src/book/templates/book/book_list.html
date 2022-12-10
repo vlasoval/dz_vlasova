@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Список книг
+{% endblock title %}
+{% block body %}
+    <h1>Список книг</h1>
+        <a href="{% url 'book:book-add' %}">Добавать книгу</a> | <a href="{% url 'book:book-add-csv' %}">Добавать книгу из csv-файла</a>
+        <table class="table table-bordered">
+            <tr>
+                <td><b>Название</b></td>
+                <td><b>Авторы</b></td>
+                <td><b>Жанры</b></td>
+                <td><b>Издательство</b></td>
+                <td><b>Серия</b></td>
+                <td><b>Год издания</b></td>
+                <td><b>Активный</b></td>
+                <td><b>Стоимость</b></td>
+            </tr>
+            {% for obj in object_list %}
+            <tr>
+                <td><a href="{% url 'book:book-update' pk=obj.pk %}">{{obj.book_title}}</a></td>
+                <td>{% for author in obj.book_author.values_list %} {{author.1}} {% endfor %}</td>
+                <td>{% for genre in obj.book_genre.values_list %} {{genre.1}} {% endfor %}</td>
+                <td>{{obj.book_publisher}}</td>
+                <td>{{obj.book_series}}</td>
+                <td>{{obj.book_year}}</td>
+                <td>{{obj.book_active}}</td>
+                <td>{{obj.book_price}} руб.</td>
+            </tr>       
+            {% endfor %}  
+        </table> 
+{% endblock body %}

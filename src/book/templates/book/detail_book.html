@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block title %}
 Просмотр товара
 {% endblock title %}
@@ -48,9 +49,29 @@
                 Возрастные ограничения: {{object.book_age}}
               </div>
               <div>
-                Рейтинг: {{object.book_rating}}
+                Рейтинг: {{object.average_rating|default_if_none:"Оценки отсутствуют"}}
+              </div>
+              <div>
+                <a href="{% url 'book:book-comment' pk=book.pk %}">Добавить комментарий</a>
               </div>
             </div>
           </div>
     </div>
+    <br>
+    <h3>Отзывы на товар</h3>
+    {% for com in object.b_comments.all%}
+      <table class="table table-bordered">
+        <tr>
+          <td>
+            {% if user.is_authenticated %}
+            <a href="{% url 'accounts:profile-detail' pk=com.customer.profile.pk %}">{{com.customer}}</a> {{com.updated_date}}<br>
+            {% else %}
+            <b>{{com.customer}}</b> {{com.updated_date}}<br>
+            {% endif %}
+            Оценка: {{com.rating}}<br>
+            Комментарий: {{com.comment}}
+          </td>
+        </tr>
+      </table>
+    {% endfor %}    
 {% endblock body %}

@@ -4,10 +4,79 @@
 Просмотр жанра
 {% endblock title %}
 {% block body %}
-    <h1>Просмотр жанра</h1>
-    {{object.user.username}}<br>
-    {{object.username}}
-    <form action="" method="post">
-        {% csrf_token %}
-    </form>
+    <h1>Данные пользователя {{object.user.username}}</h1>
+    {% for group in request.user.groups.all %}
+        {% if group.name == 'Customers'%}
+            <table class="table table-bordered">
+                <tr>
+                    <td>Имя:</td>
+                    <td>{{object.user.first_name}}</td>
+                </tr>
+                <tr>
+                    <td>Группа:</td>
+                    <td>{% for g in object.user.groups.values_list %}{{g.1}}{% endfor %}</td>
+                </tr>
+                <tr>
+                    <td>Страна:</td>
+                    <td>{{object.user.profile.country}}</td>
+                </tr>
+            </table>   
+        {% else %}
+            <table class="table table-bordered">
+                <tr>
+                    <td>Имя:</td>
+                    <td>{{object.user.first_name}}</td>
+                </tr>
+                <tr>
+                    <td>Фамилия:</td>   
+                    <td>{{object.user.last_name}}</td>
+                </tr>
+                <tr>
+                    <td>Группа:</td>
+                    <td>{% for g in object.user.groups.values_list %}{{g.1}}{% endfor %}</td>
+                </tr>
+                <tr>
+                    <td>Мобильный телефон:</td>  
+                    <td>{{object.user.profile.phone_number}}</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>  
+                    <td>{{object.user.email}}</td>
+                </tr>
+                <tr>
+                    <td>День рождения:</td>  
+                    <td>{{object.user.profile.birthday_date}}</td>
+                </tr>
+                <tr>
+                    <td>Страна:</td>  
+                    <td>{{object.user.profile.country}}</td>
+                </tr>
+                <tr>
+                    <td>Город:</td>  
+                    <td>{{object.user.profile.city}}</td>
+                </tr>
+                <tr>
+                    <td>Индекс:</td>  
+                    <td>{{object.user.profile.zip_code}}</td>
+                </tr>
+                <tr>
+                    <td>Адрес 1:</td>  
+                    <td>{{object.user.profile.address1}}</td>
+                </tr>
+                <tr>
+                    <td>Адрес 2:</td>  
+                    <td>{{object.user.profile.address2}}</td>
+                </tr>
+                <tr>
+                    <td>Дополнительная информация:</td>  
+                    <td>{{object.user.profile.information}}</td>
+                </tr>
+            </table>
+            <a href="{% url 'accounts:profile-update' pk=user.pk %}">Редактировать профиль</a>
+            <form action="" method="post">
+                {% csrf_token %}
+            </form>    
+        {% endif %}
+    {% endfor %}    
+    
 {% endblock body %}

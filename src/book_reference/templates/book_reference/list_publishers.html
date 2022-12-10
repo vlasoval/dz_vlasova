@@ -5,6 +5,7 @@
 {% endblock title %}
 {% block body %}
     <h1>Список издательств</h1>
+    <a href="{% url 'book_reference:publisher-create' %}">Добавить издательство</a>
     <table class="table table-bordered">
         {% for obj in object_list %}
         <tr>

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Home page
+{% endblock title %}
+{% block body %}
+<h1>Вы уверены? Вы хотите удалить текущий заказ? </h1>
+<form method='post'>
+    {% csrf_token %}
+    <button type="submit">Удалить</button>
+</form>
+{% endblock body %}

@@ -34,6 +34,7 @@ urlpatterns = [
     path('book/', include('book.urls', namespace='book')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
+    path('admin-portal/', views.AdminPortal.as_view(),name='adm-portsl'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

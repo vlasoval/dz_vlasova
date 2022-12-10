@@ -1,16 +1,14 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import Group, User
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from betterforms.multiform import MultiModelForm
+from django.forms.widgets import HiddenInput
 from .models import Profile
 
-
 class SignUpForm(UserCreationForm):
-    # first_name = forms.CharField(max_length=30)
-    # last_name = forms.CharField(max_length=30)
-    # email = forms.EmailField(max_length=254)
     birthday_date = forms.DateField(help_text='Format: YYYY-MM-DD')
     phone_number = forms.CharField(max_length=30)
-    # group = forms.ModelChoiceField(queryset=Group.objects.filter(name='Customers'),empty_label=None, required=True)
     country = forms.CharField(max_length=20)
     city = forms.CharField(max_length=20)
     zip_code = forms.CharField(max_length=20)
@@ -28,38 +26,7 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
-# class ProfileForm(forms.ModelForm):
-#     class Meta:
-#         model = Profile
-#         # fields = '__all__'
-#         fields = [
-#             'phone_number',
-#             'birthday_date',
-#             ]
 
-# class UserForm(forms.ModelForm):
-#     class Meta:
-#         model = User
-#         # fields = '__all__'
-#         fields = [
-#             'username'  ,
-#             'first_name',
-#             'last_name',
-#             'email',
-#             'password']
-
-# class UserFormForAdmin(forms.ModelForm):
-#     class Meta:
-#         model = User
-#         # fields = '__all__'
-#         fields = [
-#             'groups']
-
-from django import forms
-from django.contrib.auth import get_user_model
-from betterforms.multiform import MultiModelForm
-from django.forms.widgets import HiddenInput
-# from .models import UserProfile
 
 User = get_user_model()
 

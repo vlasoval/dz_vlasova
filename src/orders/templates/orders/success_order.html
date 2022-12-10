@@ -4,5 +4,28 @@
 Home page
 {% endblock title %}
 {% block body %}
-<h1>Ваш заказ принят!</h1>
+    <h1>Ваш заказ принят!</h1>
+    <table class="table table-bordered">
+    {%for b in object.cart.books.all%}
+        <tr>
+            <td>{{b.book.book_title}}</td> 
+            <td>{{b.quantity}}</td>
+            <td>{{b.book.book_price}}</td>
+            <td>{{b.price_per_position}}</td>
+        </tr>
+    {% endfor %}
+        <tr>
+            <td><b>Итоговая стоимость товара</b></td> 
+            <td></td>
+            <td></td>
+            <td>{{object.cart.total_price}}</td>
+        </tr>
+    </table>
+<!-- {{object.status}} -->
+{% if user.is_authenticated %}
+<h5>Отменить заказ либо отследить его статус можно в профиле пользователя <a href="{% url 'accounts:profile-detail' pk=object.cart.user.profile.pk %}">{{object.cart.user.username}}</a></h5>
+{% else %}
+<h5>Измерить заказ либо отследить его статус можно по телефону +375295600616</h5>
+{% endif %}
 {% endblock body %}
+

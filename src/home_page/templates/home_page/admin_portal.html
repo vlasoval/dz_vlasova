@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Home page
+{% endblock title %}
+{% block body %}
+<br>
+   <h2 align="center">Административный портал</h2><br>
+   <div class="row row-cols-4 row-cols-md-4 g-4">
+      <div class="col">
+         <div class="card h-100 w=75 border-secondary" style="width: 18rem;" >
+            <div class="card-body">
+               <h5 class="card-title" style="text-align:center"><i class="bi bi-pencil"></i></h5>
+               <h5 class="card-title" style="text-align:center">Заказы</h5>
+               <a href="{% url 'orders:list-orders' %}" class="btn btn-primary" style="display: block; margin: 0 auto;">Перейти в раздел</a>
+            </div>
+         </div>
+      </div>
+      <div class="col">
+         <div class="card h-100 border-secondary" style="width: 18rem;" >
+            <div class="card-body">
+               <h5 class="card-title" style="text-align:center"><i class="bi bi-pencil"></i></h5>
+               <h5 class="card-title" style="text-align:center">Пользователи</h5>
+               <a href="{% url 'accounts:all-profiles' %}" class="btn btn-primary" style="display: block; margin: 0 auto;">Перейти в раздел</a>
+            </div>
+         </div>
+      </div>
+      <div class="col">
+         <div class="card h-100 border-secondary" style="width: 18rem;" >
+            <div class="card-body">
+               <h5 class="card-title" style="text-align:center"><i class="bi bi-pencil"></i></h5>
+               <h5 class="card-title" style="text-align:center">Книги</h5>
+               <a href="{% url 'book:book-list' %}" class="btn btn-primary" style="display: block; margin: 0 auto;">Перейти в раздел</a>
+            </div>
+         </div>
+      </div>
+      <div class="col">
+         <div class="card h-100 border-secondary" style="width: 18rem;" >
+            <div class="card-body">
+               <h5 class="card-title" style="text-align:center"><i class="bi bi-pencil"></i></h5>
+               <h5 class="card-title" style="text-align:center">Жанры</h5>
+               <a href="{% url 'book_reference:genre-list' %}" class="btn btn-primary" style="display: block; margin: 0 auto;">Перейти в раздел</a>
+            </div>
+         </div>
+      </div>
+      <div class="col">
+         <div class="card h-100 border-secondary" style="width: 18rem;" >
+            <div class="card-body">
+               <h5 class="card-title" style="text-align:center"><i class="bi bi-pencil"></i></h5>
+               <h5 class="card-title" style="text-align:center">Авторы</h5>
+               <a href="{% url 'book_reference:author-list' %}" class="btn btn-primary" style="display: block; margin: 0 auto;">Перейти в раздел</a>
+            </div>
+         </div>
+      </div>
+      <div class="col">
+         <div class="card h-100 border-secondary" style="width: 18rem;" >
+            <div class="card-body">
+               <h5 class="card-title" style="text-align:center"><i class="bi bi-pencil"></i></h5>
+               <h5 class="card-title" style="text-align:center">Серии</h5>
+               <a href="{% url 'book_reference:series-list' %}" class="btn btn-primary" style="display: block; margin: 0 auto;">Перейти в раздел</a>
+            </div>
+         </div>
+      </div>
+      <div class="col">
+         <div class="card h-100 border-secondary" style="width: 18rem;" >
+            <div class="card-body">
+               <h5 class="card-title" style="text-align:center"><i class="bi bi-pencil"></i></h5>
+               <h5 class="card-title" style="text-align:center">Издательства</h5>
+               <a href="{% url 'book_reference:publisher-list' %}" class="btn btn-primary" style="display: block; margin: 0 auto;">Перейти в раздел</a>
+            </div>
+         </div>
+      </div>     
+   </div>
+{% endblock body %}      
+       

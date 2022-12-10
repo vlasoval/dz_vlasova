@@ -5,6 +5,7 @@
 {% endblock title %}
 {% block body %}
 <h1>Список авторов</h1>
+<a href="{% url 'book_reference:author-create' %}">Добавить автора</a>
     <table class="table table-bordered">
         {% for obj in object_list %}
         <tr>

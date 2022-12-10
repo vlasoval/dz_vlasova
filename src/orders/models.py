@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.urls import reverse_lazy
 
 User = get_user_model()
 
@@ -48,17 +49,17 @@ class BookInCart(models.Model):
     def price_per_position(self):
         return self.book.book_price * self.quantity
 statuses=(
-    ('заказ принят', 'Заказ принят'),
-    ('заказ собран', 'Заказ собран'),
-    ('заказ отправлен', 'Заказ отправлен'),
-    ('заказ доставлен', 'Заказ доставлен'),    
+    ('accepted', 'Заказ принят'),
+    ('collected', 'Заказ собран'),
+    ('sent', 'Заказ отправлен'),
+    ('deliver', 'Заказ доставлен'),    
 )
 class Order(models.Model):
     status = models.CharField(
         verbose_name='Статус',
         max_length=200,
         choices=statuses,
-        default='заказ принят'
+        default='Заказ принят'
     )
     cart = models.OneToOneField(
         "orders.Cart",
@@ -69,7 +70,7 @@ class Order(models.Model):
         max_length=200,
         verbose_name='Фамилия Имя:'
     )
-    email=models.CharField(
+    email=models.EmailField(
         max_length=200,
         verbose_name='E-mail:'
     )
@@ -81,6 +82,11 @@ class Order(models.Model):
         max_length=200,
         verbose_name='Номер телефона:'
     )
+    information=models.TextField(
+        verbose_name='Добавить комментарий к заказу:',
+        null=True,
+        blank=True,
+    )
     created_date = models.DateTimeField(
         'Created date',
         auto_now=False,
@@ -89,3 +95,5 @@ class Order(models.Model):
         'Updated date',
         auto_now=True,
         auto_now_add=False)
+    def get_absolute_url(self):
+        return reverse_lazy('orders:order-success', kwargs={'pk':self.pk})        

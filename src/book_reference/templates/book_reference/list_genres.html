@@ -5,13 +5,14 @@
 {% endblock title %}
 {% block body %}
     <h1>Список жанров</h1>
-    <table class="table table-bordered">
-        {% for obj in object_list %}
-        <tr>
-            <td><a href="{% url 'book_reference:genre-update' pk=obj.pk %}">{{obj.pk}}</a></td>
-            <td>{{obj.name}}</td>
-            <td><a href="{% url 'book_reference:genre-delete' pk=obj.pk %}" class="btn btn-danger"><i class="bi bi-x-lg"></a></td>
-        </tr>
-        {% endfor %}  
-    </table>
+    <a href="{% url 'book_reference:genre-create' %}">Добавить жанр</a>
+        <table class="table table-bordered">
+            {% for obj in object_list %}
+            <tr>
+                <td><a href="{% url 'book_reference:genre-update' pk=obj.pk %}">{{obj.pk}}</a></td>
+                <td>{{obj.name}}</td>
+                <td><a href="{% url 'book_reference:genre-delete' pk=obj.pk %}" class="btn btn-danger"><i class="bi bi-x-lg"></a></td>
+            </tr>
+            {% endfor %}  
+        </table>
 {% endblock body %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Список заказов
+{% endblock title %}
+{% block body %}
+    <h1 style="text-align:center">Список заказов</h1>
+    <table class="table table-bordered">
+        <tr>
+            <td><strong>Номер заказа</strong></td>
+            <td><strong>Статус</strong></td>
+            <td><strong>Фамилия Имя</strong></td>
+            <td><strong>Пользователь</strong></td>
+            <td><strong>Телефонный номер</strong></td>
+            <td><strong>Email</strong></td>
+            <td><strong>Адрес доставки</strong></td>
+            <td><strong>Дата оформления заказа</strong></td>
+            <td><strong>Дата изменения заказа</strong></td>
+            <td><strong>Комментарий к заказу</strong></td>
+            <td><strong>Отменить заказ</strong></td>
+            <td><strong>Добавить комментарий</strong></td>              
+        </tr>
+        {% for obj in object_list %}
+        <tr>
+            {% for group in request.user.groups.all %}
+                {% if group.name == 'Managers'%}
+                    <td><a href="{% url 'orders:order-update' pk=obj.pk %}">{{obj.pk}}</a></td>
+                {% else %}
+                    <td>{{obj.pk}}</a></td>
+                {% endif %}
+            {% endfor %}            
+            <td>{{obj.status}}</td>            
+            <td>{{obj.last_first_name}}</td>
+            <td>{{obj.cart.user.username}}</td> 
+            <td>{{obj.phone_number}}</td>
+            <td>{{obj.email}}</td>
+            <td>{{obj.adress}}</td>           
+            <td>{{obj.created_date}}</td>
+            <td>{{obj.updated_date}}</td>
+            <td>{{obj.information}}</td>
+            <td><a href="{% url 'orders:order-delete' pk=obj.pk %}" class="btn btn-danger"><i class="bi bi-x-lg"></a></td>
+            <td><a href="{% url 'orders:com-update' pk=obj.pk %}" class="btn btn-success"><i class="bi bi-plus-lg"></i></a></td>
+        </tr>
+        {% endfor %}  
+    </table>
+{% endblock body %}

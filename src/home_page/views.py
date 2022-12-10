@@ -28,3 +28,6 @@ class Payment(BaseTemplatePageMixin, generic.TemplateView):
 
 class Contacts(BaseTemplatePageMixin, generic.TemplateView):
     template_name='home_page/contacts.html'
+
+class AdminPortal(BaseTemplatePageMixin, generic.TemplateView):
+    template_name='home_page/admin_portal.html'

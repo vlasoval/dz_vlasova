@@ -5,10 +5,11 @@ from re import T
 from django import forms
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth import get_user_model
+from django.db.models import Avg
 
 
-
-# Create your models here.
+User = get_user_model()
 class Book(models.Model):
     book_title=models.CharField(
         max_length=40,
@@ -93,8 +94,23 @@ class Book(models.Model):
     book_date_change=models.DateField(
         auto_now=True,
         verbose_name='Дата последнего изменения карточки'
-    )
-    # search_fields=['book_title', 'book_author']        
+    )        
     def __str__(self):
         return self.book_title
+    @property
+    def average_rating(self):
+        return self.b_comments.all().aggregate(Avg('rating'))['rating__avg']   
+
+
+class BookComments(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='b_comments')
+    customer = models.ForeignKey(User, on_delete=models.PROTECT, related_name='b_comments')
+    comment = models.TextField()
+    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+    created_date = models.DateField(auto_now=False, auto_now_add=True)
+    updated_date = models.DateField(auto_now=True, auto_now_add=False)
+    class Meta:
+        db_table = 'BookCommentV2'
+    def __str__(self):
+        return str(self.pk)      
 

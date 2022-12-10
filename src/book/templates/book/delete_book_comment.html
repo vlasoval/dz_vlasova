@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Удаление издательства
+{% endblock title %}
+{% block body %}
+    <h1>Удаление комментария</h1>
+    {{object.comment}}<br>
+    Рейтинг:{{object.rating}}
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Submit">
+    </form>
+{% endblock body %}
