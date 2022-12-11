@@ -99,13 +99,10 @@ def handle_uploaded_file(f):
 
 def upload_file(request):
     if request.method == 'POST':
-        print('hello2')
         form = forms.UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            print('hello3')
             handle_uploaded_file(request.FILES['file'])
             return redirect('home-page')
     else:
         form = forms.UploadFileForm()
-        print('hello4')
     return render(request, 'book/create_book_cvs.html', {'form': form})

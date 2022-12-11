@@ -3,6 +3,7 @@ from . import models, forms
 from book import models as book_models
 from django.views import generic
 from django.urls import reverse_lazy
+from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
 
 class DelPosition(generic.DeleteView):
@@ -59,6 +60,7 @@ def show_cart(request):
         template_name='orders/view_cart.html', 
         context=context)
 
+User = get_user_model()
 class Order(generic.CreateView):
     model=models.Order
     form_class=forms.OrderForm
@@ -67,6 +69,13 @@ class Order(generic.CreateView):
         form.instance.cart=cart
         return super().form_valid(form)
     def get_success_url(self):
+        send_mail(
+            'Заказ в магазине',
+            'Заказ передан в обработку',
+            'vlasova66666666@gmail.com',
+            [user.email for user in User.objects.filter(groups__name='Managers')],
+            fail_silently=False,
+        )
         del self.request.session['cart_id']
         orderid=self.object.pk
         return reverse_lazy('orders:order-success', kwargs={'pk': orderid})
