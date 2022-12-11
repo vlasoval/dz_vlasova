@@ -69,7 +69,11 @@
             <b>{{com.customer}}</b> {{com.updated_date}}<br>
             {% endif %}
             Оценка: {{com.rating}}<br>
-            Комментарий: {{com.comment}}
+            Комментарий: {{com.comment}}<br>
+            {% if request.user.username == com.customer.username%}
+            <a href="{% url 'book:book-comment-update' pk=com.pk %}">Изменить</a>  |  
+            <a href="{% url 'book:book-comment-delete' pk=com.pk %}">Удалить</a>
+            {% endif %}
           </td>
         </tr>
       </table>

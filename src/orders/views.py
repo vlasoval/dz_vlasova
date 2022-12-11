@@ -5,8 +5,10 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
+from home_page.views import BaseTemplatePageMixin
 
-class DelPosition(generic.DeleteView):
+
+class DelPosition(BaseTemplatePageMixin, generic.DeleteView):
     model = models.BookInCart
     success_url = reverse_lazy('orders:show-cart')
     template_name='orders/position_delete.html'
@@ -61,7 +63,7 @@ def show_cart(request):
         context=context)
 
 User = get_user_model()
-class Order(generic.CreateView):
+class Order(BaseTemplatePageMixin, generic.CreateView):
     model=models.Order
     form_class=forms.OrderForm
     def form_valid(self, form):
@@ -80,17 +82,17 @@ class Order(generic.CreateView):
         orderid=self.object.pk
         return reverse_lazy('orders:order-success', kwargs={'pk': orderid})
 
-class OrderSuccess(generic.DetailView):
+class OrderSuccess(BaseTemplatePageMixin, generic.DetailView):
     model = models.Order
     template_name='orders/success_order.html'
 
-class OrdersAll(generic.ListView):
+class OrdersAll(BaseTemplatePageMixin, generic.ListView):
     model = models.Order
     # permission_required = ("accounts.view_book_genre")
     # login_url = reverse_lazy('login')
     template_name = 'orders/list_orders.html'
 
-class OrdersUser(generic.ListView):
+class OrdersUser(BaseTemplatePageMixin, generic.ListView):
     model = models.Order
     # permission_required = ("accounts.view_book_genre")
     # login_url = reverse_lazy('login')
@@ -98,25 +100,25 @@ class OrdersUser(generic.ListView):
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args,**kwargs)      
         return queryset.filter(cart__user__pk=self.request.user.pk)
-class OrderDetail(generic.DetailView):
+class OrderDetail(BaseTemplatePageMixin, generic.DetailView):
     model = models.Order
     template_name = 'orders/order_detail.html'
 
-class OrderUpdate(generic.UpdateView):
+class OrderUpdate(BaseTemplatePageMixin, generic.UpdateView):
     model = models.Order
     form_class = forms.OrderUpdateForm
     template_name = 'orders/update_orders.html'
     def get_success_url(self):
         return reverse_lazy('orders:order-detail', kwargs={'pk': self.object.pk})
 
-class OrderCommentUpdate(generic.UpdateView):
+class OrderCommentUpdate(BaseTemplatePageMixin, generic.UpdateView):
     model = models.Order
     form_class = forms.CommentUpdateForm
     template_name = 'orders/update_orders.html'
     def get_success_url(self):
         return reverse_lazy('orders:order-detail', kwargs={'pk': self.object.pk})
 
-class OrderDelete(generic.DeleteView):
+class OrderDelete(BaseTemplatePageMixin, generic.DeleteView):
     model = models.Order
     template_name='orders/order_delete.html'
     def get_success_url(self):

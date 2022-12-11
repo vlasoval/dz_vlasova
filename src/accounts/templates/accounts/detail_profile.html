@@ -6,7 +6,7 @@
 {% block body %}
     <h1>Данные пользователя {{object.user.username}}</h1>
     {% for group in request.user.groups.all %}
-        {% if group.name == 'Customers'%}
+        {% if group.name == 'Customers' and object.user.username != request.user.username %}
             <table class="table table-bordered">
                 <tr>
                     <td>Имя:</td>

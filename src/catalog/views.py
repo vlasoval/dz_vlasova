@@ -26,5 +26,4 @@ class Search(BaseTemplatePageMixin, generic.TemplateView):
         context = super().get_context_data(*args,**kwargs)
         search=self.request.GET['search']
         context['search_b'] = b_models.Book.objects.filter(Q(book_title__icontains=search) | Q(book_author__name__icontains=search))
-
         return context        
