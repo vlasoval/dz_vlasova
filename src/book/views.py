@@ -11,8 +11,9 @@ class ShowBook(BaseTemplatePageMixin, generic.DetailView):
     model = models.Book
     template_name = 'book/detail_book.html'
 
-class CreateBookComments(BaseTemplatePageMixin, LoginRequiredMixin, generic.CreateView):
+class CreateBookComments(BaseTemplatePageMixin, PermissionRequiredMixin, LoginRequiredMixin, generic.CreateView):
     model = models.BookComments
+    permission_required = ("book.add_book_comments")
     login_url = reverse_lazy('login')
     form_class = forms.BookCommentsForm
     template_name = 'book/create_book_comment.html'
