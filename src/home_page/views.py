@@ -10,8 +10,15 @@ class BaseTemplatePageMixin:
         context = super().get_context_data(*args,**kwargs)
         context['current_genre_all'] = models.BookGenre.objects.all()
         headers = {'Accept': 'application/json'}
-        r = requests.get('https://www.nbrb.by/api/exrates/rates/431', headers=headers)
-        context['currency'] = r.json()['Cur_OfficialRate']
+        
+        try:
+            r = requests.get('https://www.nbrb.by/api/exrates/rates/431', headers=headers, timeout=1)
+            currency_object = r.json()
+            currency_rate = currency_object['Cur_OfficialRate']
+        except:
+            currency_rate = 2.5
+
+        context['currency'] = currency_rate
         return context
 
 class HomePage(BaseTemplatePageMixin, generic.TemplateView):
