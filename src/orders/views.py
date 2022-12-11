@@ -49,6 +49,8 @@ def show_cart(request):
         if cart_id:
             cart = models.Cart.objects.get(pk=cart_id)
             context['cart'] = cart
+        
+
     if request.user.is_authenticated:
         context['form'] = forms.OrderForm(initial={'last_first_name' : request.user.last_name+' '+request.user.first_name,\
             'email': request.user.email,\
