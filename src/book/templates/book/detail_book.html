@@ -51,8 +51,16 @@
               <div>
                 Рейтинг: {{object.average_rating|default_if_none:"Оценки отсутствуют"}}
               </div>
-              <div>
-                <a href="{% url 'book:book-comment' pk=book.pk %}">Добавить комментарий</a>
+              <div>{% for group in request.user.groups.all %}{% if group.name == 'Customers' %}
+                <form action='{% url 'orders:show-cart' %}' method="post">
+                  {% csrf_token %}
+                  <input type="number" name="quantity" id="" value="1" step="1" min="1"  width="min"><br>
+                  <input type="hidden" name="book_pk" value={{obj.pk}}>
+                  <button type="submit" class="btn btn-primary mt-auto">Добавить в корзину</button>
+                </form>
+              </div>
+              <div><br>
+                <a href="{% url 'book:book-comment' pk=book.pk %}">Добавить комментарий</a>{% endif %}{% endfor %}
               </div>
             </div>
           </div>

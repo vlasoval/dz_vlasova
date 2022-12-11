@@ -88,14 +88,10 @@ class OrderSuccess(BaseTemplatePageMixin, generic.DetailView):
 
 class OrdersAll(BaseTemplatePageMixin, generic.ListView):
     model = models.Order
-    # permission_required = ("accounts.view_book_genre")
-    # login_url = reverse_lazy('login')
     template_name = 'orders/list_orders.html'
 
 class OrdersUser(BaseTemplatePageMixin, generic.ListView):
     model = models.Order
-    # permission_required = ("accounts.view_book_genre")
-    # login_url = reverse_lazy('login')
     template_name = 'orders/list_orders.html'    
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args,**kwargs)      

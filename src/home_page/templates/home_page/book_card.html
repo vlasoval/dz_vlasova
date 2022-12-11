@@ -7,14 +7,7 @@
           <h5 class="card-title">{{book.book_title}}</h5>
           <p class="card-text">{% for author in book.book_author.values_list %} {{author.1}} {% endfor %}</p>
           <p class="card-text">{{book.book_price}} руб.</p>
-          <a href="{% url 'book:book-detail' pk=book.pk %}" class="btn mt-auto">Просмотреть товар</a>
-          <!-- <a href="{% url 'book:book-detail' pk=book.pk %}" class="btn btn-primary mt-auto">Добавить в корзину</a> -->
-          <form action='{% url 'orders:show-cart' %}' method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary mt-auto">Добавить в корзину</button>
-            <input type="number" name="quantity" id="" value="1" step="1" min="1" width="min">
-            <input type="hidden" name="book_pk" value={{obj.pk}}>
-          </form>
+          <a href="{% url 'book:book-detail' pk=book.pk %}" class="btn btn-primary mt-auto">Просмотреть товар</a>
         </div>
     </div>
   </div> 
