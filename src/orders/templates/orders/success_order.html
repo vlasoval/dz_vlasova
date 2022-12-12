@@ -23,9 +23,9 @@ Home page
     </table>
 <!-- {{object.status}} -->
 {% if user.is_authenticated %}
-<h5>Отменить заказ либо отследить его статус можно в профиле пользователя <a href="{% url 'accounts:profile-detail' pk=object.cart.user.profile.pk %}">{{object.cart.user.username}}</a></h5>
+<h5>Отменить заказ либо отследить его статус можно в профиле пользователя <a href="{% url 'orders:orders-user' %}">{{user.username}}</a></h5>
 {% else %}
-<h5>Измерить заказ либо отследить его статус можно по телефону +375295600616</h5>
+<h5>Изменить заказ либо отследить его статус можно по телефону +375295600616</h5>
 {% endif %}
 {% endblock body %}
 

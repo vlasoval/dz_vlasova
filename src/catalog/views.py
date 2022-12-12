@@ -19,11 +19,16 @@ class Catalog(BaseTemplatePageMixin, generic.TemplateView):
         context['book_filter'] = b_models.Book.objects.filter(book_genre__pk=kwargs['pk'])
         context['current_genre'] = models.BookGenre.objects.get(pk=kwargs['pk'])
         return context
-
+from django.db.models.functions import Lower
 class Search(BaseTemplatePageMixin, generic.TemplateView):
     template_name='catalog/search.html'
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args,**kwargs)
         search=self.request.GET['search']
-        context['search_b'] = b_models.Book.objects.filter(Q(book_title__icontains=search) | Q(book_author__name__icontains=search))
+        context['search_b'] = b_models.Book.objects.filter(
+            Q(book_title__icontains=search) | 
+            Q(book_author__name__icontains=search) | 
+            Q(book_title_lower__icontains=search) | 
+            Q(book_author__name_lower__icontains=search)
+        )
         return context        

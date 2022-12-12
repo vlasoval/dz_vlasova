@@ -44,8 +44,22 @@ class BookAuthor(models.Model):
         max_length=40,
         verbose_name='Автор'
         )
+
+    name_lower=models.CharField(
+        max_length=40,
+        verbose_name='Автор',
+        editable=False,
+        null=True,
+        blank=True
+    )
+
+    def save(self, *args, **kwargs):
+        self.name_lower=self.name.lower() if self.name else None
+        return super().save(*args, **kwargs)
+
     def __str__(self):
         return self.name
+
     def get_absolute_url(self):
         return reverse_lazy('book_reference:author-detail', kwargs={'pk':self.pk})
 

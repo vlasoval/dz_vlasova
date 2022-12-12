@@ -55,7 +55,7 @@
                 <form action='{% url 'orders:show-cart' %}' method="post">
                   {% csrf_token %}
                   <input type="number" name="quantity" id="" value="1" step="1" min="1"  width="min"><br>
-                  <input type="hidden" name="book_pk" value={{obj.pk}}>
+                  <input type="hidden" name="book_pk" value={{book.pk}}>
                   <button type="submit" class="btn btn-primary mt-auto">Добавить в корзину</button>
                 </form>
               </div>
@@ -66,7 +66,7 @@
                   <form action='{% url 'orders:show-cart' %}' method="post">
                     {% csrf_token %}
                     <input type="number" name="quantity" id="" value="1" step="1" min="1"  width="min"><br>
-                    <input type="hidden" name="book_pk" value={{obj.pk}}>
+                    <input type="hidden" name="book_pk" value={{book.pk}}>
                     <button type="submit" class="btn btn-primary mt-auto">Добавить в корзину</button>
                   </form>
                 </div>{% endif %}

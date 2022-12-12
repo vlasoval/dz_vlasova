@@ -13,8 +13,7 @@ User = get_user_model()
 class Book(models.Model):
     book_title=models.CharField(
         max_length=40,
-        verbose_name='Название книги'
-        
+        verbose_name='Название книги'   
     )
     book_cover_photo=models.ImageField(
         verbose_name='Фото обложки',
@@ -94,9 +93,22 @@ class Book(models.Model):
     book_date_change=models.DateField(
         auto_now=True,
         verbose_name='Дата последнего изменения карточки'
-    )        
+    )
+    book_title_lower=models.CharField(
+        max_length=40,
+        verbose_name='Название книги',
+        editable=False,
+        null=True,
+        blank=True   
+    )
+
     def __str__(self):
         return self.book_title
+    
+    def save(self, *args, **kwargs):
+        self.book_title_lower=self.book_title.lower() if self.book_title else None
+        return super().save(*args, **kwargs)
+
     @property
     def average_rating(self):
         return self.b_comments.all().aggregate(Avg('rating'))['rating__avg']   

@@ -12,12 +12,14 @@ class DelPosition(BaseTemplatePageMixin, generic.DeleteView):
     model = models.BookInCart
     success_url = reverse_lazy('orders:show-cart')
     template_name='orders/position_delete.html'
+
 def show_cart(request):
     context = {}
     context['cart'] = None
     if request.method == 'POST':
         book_pk = request.POST.get('book_pk')
         quantity = request.POST.get('quantity')
+
         if book_pk and quantity:
             cart_id = request.session.get('cart_id', 0)
             if request.user.is_authenticated:
