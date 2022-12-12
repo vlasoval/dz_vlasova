@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
 from home_page.views import BaseTemplatePageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class DelPosition(BaseTemplatePageMixin, generic.DeleteView):
@@ -90,11 +91,11 @@ class OrderSuccess(BaseTemplatePageMixin, generic.DetailView):
     model = models.Order
     template_name='orders/success_order.html'
 
-class OrdersAll(BaseTemplatePageMixin, generic.ListView):
+class OrdersAll(BaseTemplatePageMixin, LoginRequiredMixin, generic.ListView):
     model = models.Order
     template_name = 'orders/list_orders.html'
 
-class OrdersUser(BaseTemplatePageMixin, generic.ListView):
+class OrdersUser(BaseTemplatePageMixin, LoginRequiredMixin, generic.ListView):
     model = models.Order
     template_name = 'orders/list_orders.html'    
     def get_queryset(self, *args, **kwargs):
@@ -104,7 +105,7 @@ class OrderDetail(BaseTemplatePageMixin, generic.DetailView):
     model = models.Order
     template_name = 'orders/order_detail.html'
 
-class OrderUpdate(BaseTemplatePageMixin, generic.UpdateView):
+class OrderUpdate(BaseTemplatePageMixin, LoginRequiredMixin, generic.UpdateView):
     model = models.Order
     form_class = forms.OrderUpdateForm
     template_name = 'orders/update_orders.html'

@@ -58,10 +58,8 @@
                   <input type="hidden" name="book_pk" value={{book.pk}}>
                   <button type="submit" class="btn btn-primary mt-auto">Добавить в корзину</button>
                 </form>
-              </div>
-              <div><br>
-                <a href="{% url 'book:book-comment' pk=book.pk %}">Добавить комментарий</a>{% endif %}{% endfor %}
-                {% if user.is_authenticated != True %}
+              </div>{% endif %}{% endfor %}
+              {% if user.is_authenticated != True %}
                 <div>
                   <form action='{% url 'orders:show-cart' %}' method="post">
                     {% csrf_token %}
@@ -69,8 +67,10 @@
                     <input type="hidden" name="book_pk" value={{book.pk}}>
                     <button type="submit" class="btn btn-primary mt-auto">Добавить в корзину</button>
                   </form>
+                </div>{% else %}
+                <div><br>
+                  <a href="{% url 'book:book-comment' pk=book.pk %}">Добавить комментарий</a>
                 </div>{% endif %}
-              </div>
             </div>
           </div>
     </div>

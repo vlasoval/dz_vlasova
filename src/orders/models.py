@@ -49,10 +49,10 @@ class BookInCart(models.Model):
     def price_per_position(self):
         return self.book.book_price * self.quantity
 statuses=(
-    ('accepted', 'Заказ принят'),
-    ('collected', 'Заказ собран'),
-    ('sent', 'Заказ отправлен'),
-    ('deliver', 'Заказ доставлен'),    
+    ('Заказ принят', 'Заказ принят'),
+    ('Заказ собран', 'Заказ собран'),
+    ('Заказ отправлен', 'Заказ отправлен'),
+    ('Заказ доставлен', 'Заказ доставлен'),    
 )
 class Order(models.Model):
     status = models.CharField(

@@ -86,7 +86,9 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark">
                   <li><a class="dropdown-item" href="{% url 'accounts:profile-detail' pk=user.profile.pk %}">Личные данные</a></li>
-                  <li><a class="dropdown-item" href="{% url 'orders:orders-user' %}">Мои заказы</a></li>
+                  {% for group in request.user.groups.all %}
+                  {% if group.name == 'Customers' and object.user.username != request.user.username %}
+                  <li><a class="dropdown-item" href="{% url 'orders:orders-user' %}">Мои заказы</a></li>{% endif %}{% endfor %}
                   <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
                 </ul>
               </li>
