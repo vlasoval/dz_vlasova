@@ -69,6 +69,15 @@ Home page
                <a href="{% url 'book_reference:publisher-list' %}" class="btn btn-primary" style="display: block; margin: 0 auto;">Перейти в раздел</a>
             </div>
          </div>
+      </div>
+      <div class="col">
+         <div class="card h-100 border-secondary" style="width: 18rem;" >
+            <div class="card-body">
+               <h5 class="card-title" style="text-align:center"><i class="bi bi-pencil"></i></h5>
+               <h5 class="card-title" style="text-align:center">Комментарии</h5>
+               <a href="{% url 'book:book-comment-list' %}" class="btn btn-primary" style="display: block; margin: 0 auto;">Перейти в раздел</a>
+            </div>
+         </div>
       </div>     
    </div>
 {% endblock body %}      
