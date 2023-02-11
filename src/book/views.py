@@ -33,7 +33,18 @@ class CreateBookComments(BaseTemplatePageMixin, LoginRequiredMixin, generic.Crea
     def get_success_url(self):
         return reverse_lazy('book:book-detail', kwargs={'pk': self.object.book.pk})
 
+class ShowComments(BaseTemplatePageMixin, generic.ListView):
+    model = models.BookComments
+    template_name = 'book/comments_list.html'
 
+class SearchCom(BaseTemplatePageMixin, generic.TemplateView):
+    template_name='book/search_com.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args,**kwargs)
+        search=self.request.GET['search']
+        context['search_c'] = models.BookComments.objects.filter(comment__icontains=search
+        )
+        return context  
 
 class UpdateBookComments(BaseTemplatePageMixin, LoginRequiredMixin, generic.UpdateView):
     model = models.BookComments

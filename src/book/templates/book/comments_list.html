@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Список комментариев
+{% endblock title %}
+{% block body %}
+    <h1 style="text-align:center">Список комментариев</h1>
+    <form class="d-flex" role="search" method="get" action="/book/search">
+        <input name="search" class="form-control me-1" type="search" placeholder="Поиск по комментариям" aria-label="Поиск" style="min-width: max-content;">
+        <button class="btn btn-outline-light" type="submit">Поиск</button>
+      </form> 
+    <table class="table table-bordered">
+        <tr>
+            <td><strong>Книга</strong></td>
+            <td><strong>Комментарий</strong></td>
+            <td><strong>Оценка</strong></td>
+            <td><strong>Дата</strong></td>
+            <td><strong>Пользователь</strong></td>        
+        </tr>
+        {% for obj in object_list %}
+        <tr>          
+            <td><a href="{% url 'book:book-detail' pk=obj.pk %}">{{obj.book}}</a></td>            
+            <td>{{obj.comment}}</td>
+            <td>{{obj.rating}}</td> 
+            <td>{{obj.updated_date}}</td>
+            <td>{{obj.customer}}</td>
+        </tr>
+        {% endfor %}  
+    </table>
+{% endblock body %}
