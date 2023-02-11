@@ -123,6 +123,7 @@ class BookComments(models.Model):
     updated_date = models.DateField(auto_now=True, auto_now_add=False)
     class Meta:
         db_table = 'BookCommentV2'
+        ordering = ['-id']
     def __str__(self):
         return str(self.pk)      
 

@@ -10,6 +10,5 @@ urlpatterns = [
     path('all/', views.ShowBooks.as_view(), name='book-list'),
     path('add_book/', views.CreateBook.as_view(), name='book-add'),
     path('update_book/<int:pk>/', views.UpdateBook.as_view(), name='book-update'),
-    path('add_book_csv/', views.upload_file, name='book-add-csv'),
-    path('search/', views.SearchCom.as_view(template_name='book/search_com.html'), name='search-com'),   
+    path('add_book_csv/', views.upload_file, name='book-add-csv'), 
 ]

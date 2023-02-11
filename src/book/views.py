@@ -34,17 +34,27 @@ class CreateBookComments(BaseTemplatePageMixin, LoginRequiredMixin, generic.Crea
         return reverse_lazy('book:book-detail', kwargs={'pk': self.object.book.pk})
 
 class ShowComments(BaseTemplatePageMixin, generic.ListView):
+    paginate_by = 7
     model = models.BookComments
     template_name = 'book/comments_list.html'
+    class Meta:
+        ordering = ['-id']
+    def get_queryset(self): 
+        qs = super().get_queryset() 
+        if 'search' in self.request.GET:
+            search=self.request.GET['search']
+            return qs.filter(comment__icontains=search)
+        else:
+            return qs
 
-class SearchCom(BaseTemplatePageMixin, generic.TemplateView):
-    template_name='book/search_com.html'
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args,**kwargs)
-        search=self.request.GET['search']
-        context['search_c'] = models.BookComments.objects.filter(comment__icontains=search
-        )
-        return context  
+# class SearchCom(BaseTemplatePageMixin, generic.TemplateView):
+#     template_name='book/search_com.html'
+#     def get_context_data(self, *args, **kwargs):
+#         context = super().get_context_data(*args,**kwargs)
+#         search=self.request.GET['search']
+#         context['search_c'] = models.BookComments.objects.filter(comment__icontains=search
+#         )
+#         return context  
 
 class UpdateBookComments(BaseTemplatePageMixin, LoginRequiredMixin, generic.UpdateView):
     model = models.BookComments
